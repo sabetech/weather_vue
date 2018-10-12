@@ -1,11 +1,11 @@
 <template>
 	
 	<div>
-		<div><label>City:{{ weatherInfo.cityName }}</label></div>
-		<div><label>Temperature:{{ weatherInfo.temperature }}</label></div>
-		<div><label>Maximum Temperature:{{ weatherInfo.maximumTemperature }}</label></div>
-		<div><label>Minimum Temperature:{{ weatherInfo.minimumTemperature }}</label></div>
-		<div><label>Icon Link:{{ weatherInfo.weatherIcon }}</label></div>
+		<div><label><strong>City:</strong>{{ weatherInfo.cityName }}</label></div>
+		<div><label><strong>Temperature:</strong>{{ weatherInfo.temperature }}</label></div>
+		<div><label><strong>Maximum Temperature:</strong>{{ weatherInfo.maximumTemperature }}</label></div>
+		<div><label><strong>Minimum Temperature:</strong>{{ weatherInfo.minimumTemperature }}</label></div>
+		<div><label><img :src="weatherInfo.weatherIcon" :width="40"></label></div>
 	</div>
 		
 </template>
@@ -35,7 +35,7 @@ export default {
 			this.weatherInfo.temperature = result.data.consolidated_weather[0].the_temp;;
 			this.weatherInfo.maximumTemperature = result.data.consolidated_weather[0].max_temp;
 			this.weatherInfo.minimumTemperature = result.data.consolidated_weather[0].min_temp;
-			this.weatherInfo.weatherIcon = "/static/img/weather/" + result.data.consolidated_weather[0].weather_state_abbr+".svg";
+			this.weatherInfo.weatherIcon = "http://www.metaweather.com/static/img/weather/" + result.data.consolidated_weather[0].weather_state_abbr+".svg";
 			
 		},
 		getWeatherByLocation: function(woeid, vueComponent){
@@ -50,6 +50,7 @@ export default {
 	},
 	mounted(){
 		this.getWeatherByLocation(this.details.cities_woeid[0], this);
+		//console.log(woeiad);
 	}
 }	
 </script>

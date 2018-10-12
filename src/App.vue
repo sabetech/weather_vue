@@ -2,7 +2,8 @@
   <div id="app">
     <h1>Weather App</h1>
     <p>{{ info }}</p>
-    <router-view/>
+    
+    <router-view />
   </div>
 </template>
 
