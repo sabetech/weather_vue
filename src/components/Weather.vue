@@ -1,8 +1,11 @@
 <template>
 	
-	<div >
-		<h1>Weather App</h1>
-		<p>{{ info }}</p>
+	<div>
+		<div><label>City:{{ weatherInfo.cityName }}</label></div>
+		<div><label>Temperature:{{ weatherInfo.temperature }}</label></div>
+		<div><label>Maximum Temperature:{{ weatherInfo.maximumTemperature }}</label></div>
+		<div><label>Minimum Temperature:{{ weatherInfo.minimumTemperature }}</label></div>
+		<div><label>Icon Link:{{ weatherInfo.weatherIcon }}</label></div>
 	</div>
 		
 </template>
@@ -13,7 +16,6 @@ export default {
   name: 'Weather',
   data () {
     return {
-			info:"This is a VueJs App to show weather information using the metaweather API",
 			weatherInfo: {
 				cityName:null,
 				temperature:null,
@@ -22,23 +24,32 @@ export default {
 				weatherIcon:null
 			},
 			details: {
-				cities:["Istanbul", "Berlin", "London","Helsinki", "Dublin", "Vancouver"]
+				//cities:["Istanbul", "Berlin", "London","Helsinki", "Dublin", "Vancouver"]
+				cities_woeid:[2344116, 638242, 44418, 565346, 560743, 9807]
 			}
 		}
 	},
 	methods:{
-		dummy: function(){
-			console.log("dummy function call")
+		displayResult: function(result){
+			this.weatherInfo.cityName = result.data.title;
+			this.weatherInfo.temperature = result.data.consolidated_weather[0].the_temp;;
+			this.weatherInfo.maximumTemperature = result.data.consolidated_weather[0].max_temp;
+			this.weatherInfo.minimumTemperature = result.data.consolidated_weather[0].min_temp;
+			this.weatherInfo.weatherIcon = "/static/img/weather/" + result.data.consolidated_weather[0].weather_state_abbr+".svg";
+			
+		},
+		getWeatherByLocation: function(woeid, vueComponent){
+			axios.get('http://repeater.local/weather.php?command=location&woeid='+woeid)
+			.then(function(result){
+				vueComponent.displayResult(result);
+			})
+			.catch( function(error){
+				console.log(error);
+			})	
 		}
 	},
 	mounted(){
-		axios.get('http://localhost:8080/weather.php?url=https://www.metaweather.com/api/location/44418/2018/10/10/')
-		.then(function(result){
-			console.log("Result: "+result);
-		})
-		.catch( function(error){
-			console.log("Error: " +error);
-		})
+		this.getWeatherByLocation(this.details.cities_woeid[0], this);
 	}
 }	
 </script>

@@ -1,13 +1,19 @@
 <template>
   <div id="app">
-    
+    <h1>Weather App</h1>
+    <p>{{ info }}</p>
     <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      info:"This is a VueJs App to show weather information using the metaweather API"
+    }
+  }
 }
 </script>
 
