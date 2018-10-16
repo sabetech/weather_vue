@@ -4,7 +4,7 @@ import Weather from '@/components/Weather'
 
 Vue.use(Router)
 
-export default new Router({
+export default new Router({mode: 'history',
   routes: [
     {
       path: '/',
@@ -12,7 +12,12 @@ export default new Router({
       component: Weather
     },
     {
-      path: '/search',
+      path: '/weather/:woeid',
+      name: 'WeatherDetails',
+      component: Weather
+    },
+    {
+      path: '/search/:keyword',
       name: 'WeatherSearch',
       component: Weather
     }

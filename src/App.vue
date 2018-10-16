@@ -1,6 +1,21 @@
 <template>
   <div id="app">
-    <h1>Weather App</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Weather App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <router-link to="/">Home </router-link>
+          </li>
+        </ul>
+      </div>
+      
+    </nav>
     <p>{{ info }}</p>
     
     <router-view />
@@ -19,6 +34,9 @@ export default {
 </script>
 
 <style>
+
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
