@@ -10,6 +10,11 @@ export default new Router({
       path: '/',
       name: 'Weather',
       component: Weather
+    },
+    {
+      path: '/search',
+      name: 'WeatherSearch',
+      component: Weather
     }
   ]
 })
